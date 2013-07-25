@@ -1,13 +1,6 @@
 use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
-my @data;
-
-#for creating config file .m in $ENV{HOME}/
-@data="#add all paths to your folders after 'FOLDER:' separated by space\nFOLDER:\n\n#all the formats to be played after 'FORMAT:' separated by space\n#popular audio formats include 'mp3 wav flac wma ra rm ram ogg mid'\n#popular video formats include 'mov avi divx mpeg mpg m4p flv wmv'\nFORMAT:mp3 wav flac\n\n#put 'off' to disable shuffle after 'SHUFFLE:'\nSHUFFLE:on";
-open(DATA,">$ENV{HOME}/.m");
-print DATA ("@data");
-close(DATA);
 
 WriteMakefile(
 	      NAME              => 'Mplayer::m',

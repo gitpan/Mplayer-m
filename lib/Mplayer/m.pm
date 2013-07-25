@@ -3,7 +3,7 @@ package Mplayer::m;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(play);
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 #absolutely essential modules
 use strict;
@@ -14,16 +14,21 @@ use File::Find;
 use List::MoreUtils qw(uniq);
 use File::Basename;
 
-my (@m,$m,@allfolder,@folder,$USER,@allformat,@format,$format,$folder,@match,@allmatch,$match,$style,$i,$choice,@allchoice,$allargv,$allchoice,$directory,$shuffle,@check,$check);
+my (@m,$m,@allfolder,@folder,$USER,@allformat,@format,$format,$folder,@match,@allmatch,$match,$style,$i,$choice,@allchoice,$allargv,$allchoice,$directory,$shuffle,@check,$check,@data);
 
 #getting user name
 $USER=$ENV{USER};
 sub play {
   
   #erasing .list file and reading settings file .m
-  write_file("/home/$USER/.list");
-  @m=read_file("/home/$USER/.m");
-  
+  if(-f "/home/$USER/.m"){
+    write_file("/home/$USER/.list");
+    @m=read_file("/home/$USER/.m");
+  }else{
+    #for creating config file .m in $ENV{HOME}/
+    @data="#add all paths to your folders after 'FOLDER:' separated by space\nFOLDER:\n\n#all the formats to be played after 'FORMAT:' separated by space\n#popular audio formats include 'mp3 wav flac wma ra rm ram ogg mid'\n#popular video formats include 'mov avi divx mpeg mpg m4p flv wmv'\nFORMAT:mp3 wav flac\n\n#put 'off' to disable shuffle after 'SHUFFLE:'\nSHUFFLE:on";
+    write_file("/home/$USER/.m",@data);
+  }
   #processing data from .m file
   foreach $m(@m){
     $m =~ s/\s+$//;
@@ -200,24 +205,42 @@ Mplayer::m - seek and play
   #to play all files
   m
 
-  #to play all files matching keyword ('my keyword here' matching audio/video files)
-  m my keyword here
+  #to play all files matching key word ('key word here' matching audio/video files)
+  m key word here
 
-  #to play all files matching several keywords('my' or 'keyword' or 'here' matching audio/video files)
-  m -s my keyword here
+  #to play all files matching several keywords('key' or 'word' or 'here' matching audio/video files)
+  m -s key word here
 
   #to list all folders
   m -f .
 
-  #to find and play files from a folder matching a keyword ('my keyword here' matching folders)
-  m -f my keyword here
+  #to find and play files from a folder matching a keyword ('key word here' matching folders)
+  m -f key word here
 
-  #to find and play files matching several keywords('my' or 'keyword' or 'here' matching folders)
-  m -fs my keyword here
+  #to find and play files matching several keywords('key' or ' word' or 'here' matching folders)
+  m -fs key word here
+
 =head1 DESCRIPTION
 
 Module for finding audio/video files and play with mplayer.
-Installing the module will create '.m' text file in your Home folder which contains information about path and formats to be searched.Make sure it is filled before use. Then just execute 'm' in your terminal.The speed and simplicity of this module makes it amazingly beautiful.
+
+=head1 METHOD
+
+Run 'm' once in terminal after installing the module.This will create '.m' in your Home folder which will contain folder paths and formats to be searched.Add folder paths to .m (see 'Content of '.m' file below).After this just execute 'm' again and Enjoy!!
+
+When using m with folder options ( -f or -fs ) it will show a list of folder with path duly numbered.For example
+
+  #m -f rammstein
+  
+   1 /media/Music/Rammstein-Greatest Hits/CD1
+   2 /media/Music/Rammstein-Greatest Hits/CD2
+   3 /media/Music/Rammstein/some collection
+  
+Now select any number of folder listed by entering corresponding number on the left side seperated by space and then pressing Enter.For example
+
+  #1 3
+
+will play files in '/media/Music/Rammstein-Greatest Hits/CD1'  &  '/media/Music/Rammstein/some collection'
 
 =head2 Content of '.m' file
 
@@ -232,24 +255,9 @@ Installing the module will create '.m' text file in your Home folder which conta
   #put 'off' to disable shuffle after 'SHUFFLE:'
   SHUFFLE:on
 
-Make sure you fill 'FOLDER:' option eg. FOLDER:/home/mani/Downloads /media/Entertainment
-By defualt for 'FORMAT:' option, 'mp3,wav and flac' are included. Definitely change it if you need.
+Make sure you fill 'FOLDER:' option eg. FOLDER:/home/mani/Downloads  /media/Entertainment
+By defualt for 'FORMAT:' option, 'mp3,wav and flac' are included.
 By default 'SHUFFLE:' is on
-=head1 METHOD
-
-When using m with folder options ( -f or -fs ) it will show a list of folder with path duly numbered.For example
-
-  #m -f rammstein
-  
-   1 /media/Music/Rammstein-Greatest Hits[mp3]/CD1
-   2 /media/Music/Rammstein-Greatest Hits[mp3]/CD2
-   3 /media/Music/Rammstein/some collection
-  
-Now select any number of folder listed by entering corresponding number on the left side seperated by space and then pressing Enter.For example
-
-  #1 3
-
-will play files in '/media/Music/Rammstein-Greatest Hits[mp3]/CD1' & '/media/Music/Rammstein/some collection'
 
 =head2 EXPORT
 
