@@ -1,0 +1,25 @@
+---
+abstract: 'seek and play'
+author:
+  - 'Dileep Mani <dileepmani@gmail.com>'
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.68, CPAN::Meta::Converter version 2.131560'
+license: unknown
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Mplayer-m
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  File::Basename: 2
+  File::Find: 1
+  File::Slurp: 9999
+  List::MoreUtils: 0
+version: 0.01

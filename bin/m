@@ -1,0 +1,8 @@
+#!/usr/bin/perl -l
+#part of Mplayer::m module
+
+use strict;
+use warnings;
+use Mplayer::m;
+
+play;

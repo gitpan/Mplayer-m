@@ -1,0 +1,33 @@
+Mplayer-m version 0.01
+======================
+
+Module for finding audio/video files and play with mplayer.
+Installing the module will create '.m' text file in your Home folder which contains information about path and formats to be searched.Make sure it is filled before use. Then just execute 'm' in your terminal.The speed and simplicity of this module makes it amazingly beautiful.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  use File::Slurp
+  use File::Find
+  use List::MoreUtils
+  use File::Basename
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2013 by Dileep Mani
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.18.0 or,
+at your option, any later version of Perl 5 you may have available.
+
+
