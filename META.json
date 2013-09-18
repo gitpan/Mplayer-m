@@ -4,7 +4,7 @@
       "Dileep Mani <dileepmani@gmail.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.68, CPAN::Meta::Converter version 2.131560",
+   "generated_by" : "ExtUtils::MakeMaker version 6.72, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "unknown"
    ],
@@ -32,13 +32,13 @@
       },
       "runtime" : {
          "requires" : {
-            "File::Basename" : "2",
-            "File::Find" : "1",
-            "File::Slurp" : "9999",
+            "File::Basename" : "0",
+            "File::Find" : "0",
+            "File::Slurp" : "0",
             "List::MoreUtils" : "0"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.02"
+   "version" : "0.03"
 }

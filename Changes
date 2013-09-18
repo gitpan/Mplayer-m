@@ -1,5 +1,9 @@
 Revision history for Perl extension Mplayer::m.
 
+0.03  corrected problem when format extension was in capital letters
+      new feature of providing range of folders
+
+
 0.01  Tue Jul 23 16:17:42 2013
 	- original version; created by h2xs 1.23 with options
 		-AX -n Mplayer::m
